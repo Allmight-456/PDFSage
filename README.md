@@ -1,65 +1,131 @@
 # PDFSage
+[![PDFSage](/backend/PDFSage.png)](link_url)
 
-PDFSage is a web application that allows users to upload PDF and TXT files and ask questions about the content. The application uses Google Generative AI and FAISS for vector search and question answering.
+PDFSage is a web application that allows users to upload PDF and TXT files and ask questions about their content. It leverages Google Generative AI and FAISS for efficient vector search and question answering.
 
-## Features
+**Purpose:** To provide a user-friendly interface for extracting information from documents using natural language queries.
 
-- Upload PDF and TXT files
-- Process and extract text from uploaded files
-- Generate vector embeddings using Google Generative AI
-- Perform similarity search using FAISS
-- Answer questions based on the content of the uploaded files
+**Key Features:**
 
-## Prerequisites
+-   Upload and process PDF and TXT files.
+-   Generate vector embeddings using Google Generative AI.
+-   Perform similarity search using FAISS.
+-   Answer questions based on document content.
 
-- Python 3.7 or higher
-- pip (Python package installer)
+**Target Audience:** Students, researchers, and professionals who need to quickly extract information from large documents.
 
-## Backend Setup
+## Setup Instructions
 
-### 1. Clone the Repository
+### Prerequisites
 
-```bash
-git clone https://github.com/Allmight-456/PDFSage.git
-cd pdfsage/backend
+-   Python 3.7+
+-   Node.js and npm (for the frontend)
 
-```
-### 2. Create a Virtual Environment
-```bash
-python3 -m venv venv
-source venv/bin/activate  # On macOS/Linux
-```
+### Backend Installation
 
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+1.  **Clone the Repository:**
 
-### 4. Setup an .env file in backend directory 
-```bash
-GEMINI_API_KEY= "your_gemini_api_key"
-GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-file.json"
-```
-Replace your_gemini_api_key, your_openai_api_key, and /path/to/your/service-account-file.json with your actual API keys and the path to your Google service account JSON file.
+    ```bash
+    git clone https://github.com/Allmight-456/PDFSage.git
+    cd PDFSage/backend
+    
+2.  **Create a Virtual Environment:**
 
-### 5. Run the Application
-```bash
-streamlit run app.py
-```
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On macOS/Linux
+    
+3.  **Install Dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    
+4.  **Configure Environment Variables:**
+
+    Create a `.env` file in the `backend` directory with the following content:
+
+        GEMINI_API_KEY="your_gemini_api_key" 
+        GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-file.json"
+    
+    Replace `"your_gemini_api_key"` and `"/path/to/your/service-account-file.json"` with your actual Gemini API key and the path to your Google service account JSON file.
+
+6.  **Run the Application:**
+
+    ```bash
+    streamlit run app.py
+    
 This will start the Streamlit server and open the application in your default web browser.
 
-## Frontend Setup
-The frontend folder is not integrated with the backend. However, the backend can function as a standalone application with its own frontend using Streamlit.
+### Frontend Installation
 
-```bash
-cd ../frontend
-npm install
-npm run dev
+1.  **Navigate to the Frontend Directory:**
+
+    ```bash
+    cd ../frontend
+    
+2.  **Install Dependencies:**
+
+    ```bash
+    npm install
+    
+3.  **Run the Development Server:**
+
+    ```bash
+    npm run dev
+    
+  This will start the Next.js development server.
+
+## Core Modules and Architecture
+
+The project consists of two main parts: a backend (Streamlit application) and a frontend (Next.js application).
+
+**Backend (app.py):**
+
+-   **`get_text_from_file(file)`:** Extracts text from uploaded PDF or TXT files.
+-   **`get_text_chunks(text)`:** Splits the extracted text into smaller chunks for processing.
+-   **`get_vector_store(text_chunks)`:** Generates vector embeddings for the text chunks using Google Generative AI and stores them in a FAISS index.
+-   **`get_conversational_chain()`:** Creates a conversational chain using the Gemini model for question answering.
+-   **`user_input(user_question)`:** Performs similarity search on the FAISS index to find relevant documents and answers the user's question using the conversational chain.
+
+**Frontend (Next.js):**
+
+-   **`Header`:** Displays the application header.
+-   **`Footer`:** Displays the application footer.
+-   **`PDFUploader`:** Allows users to upload PDF files.
+-   **`SearchBar`:** Provides a search bar for users to enter their questions.
+-   **`ResultsDisplay`:** Displays the search results.
+
+## Usage Examples
+
+1.  **Upload a PDF file:** Use the `PDFUploader` component to upload a PDF document.
+2.  **Ask a question:** Enter your question in the `SearchBar` and press Enter.
+3.  **View the results:** The `ResultsDisplay` component will show the answer generated by the backend.
+
+## Dependencies
+
+**Backend:**
+
+-   `streamlit`: For creating the web application.
+-   `google-generativeai`: For accessing Google's generative AI models.
+-   `python-dotenv`: For loading environment variables from a `.env` file.
+-   `langchain`: For building the conversational chain.
+-   `PyPDF2`: For reading PDF files.
+-   `faiss-cpu`: For performing similarity search.
+-   `langchain_google_genai`: Langchain integration for Google Generative AI.
+
+**Frontend:**
+
+-   `next`: Next.js framework.
+-   `react`: React library.
+-   `react-dom`: React DOM library.
+-   `lucide-react`: Icons.
+-   `tailwindcss`: CSS framework.
+
+## Future Improvements and Roadmap
+
+-   Implement a more robust error handling mechanism.
+-   Add support for more file types (e.g., DOCX, EPUB).
+-   Improve the accuracy and relevance of the search results.
+-   Integrate the frontend and backend for a seamless user experience.
+-   Add user authentication and authorization.
 ```
-
-### Notes 
-The backend uses Google Generative AI and FAISS for processing and answering questions.
-Ensure that your environment variables are set correctly to avoid authentication issues.
-The backend can function independently with its own frontend using Streamlit.
-
-
