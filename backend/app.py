@@ -1,3 +1,8 @@
+# This commit only has Gemini API and FAISS implementation and 
+# does not have the GOOGLE_APPLICATION_CREDENTIALS implementation
+
+# GOOGLE_APPLICATION_CREDENTIALS implementation is in the previous  commit
+
 # This does not require a frontend and runs on streamlit frontend itself
 # This is a simple implementation of the conversational chain using the PDF files
 # The user can upload the PDF files and ask questions from the PDF files
@@ -18,7 +23,6 @@ from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 
 load_dotenv()
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_text_from_file(file):
@@ -51,7 +55,7 @@ def get_conversational_chain():
 
     Answer:
     """
-    model = ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0.3)
+    model = ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0.5)
     prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
     chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
     return chain

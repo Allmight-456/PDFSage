@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gen-lang-client-0644300382-e9e572ee3fef.json
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
