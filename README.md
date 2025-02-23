@@ -44,7 +44,7 @@ PDFSage is a web application that allows users to upload PDF and TXT files and a
 
     Create a `.env` file in the `backend` directory with the following content:
 
-        GEMINI_API_KEY="your_gemini_api_key" 
+        GOOGLE_API_KEY="your_gemini_api_key" 
         GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-file.json"
     
     Replace `"your_gemini_api_key"` and `"/path/to/your/service-account-file.json"` with your actual Gemini API key and the path to your Google service account JSON file.
